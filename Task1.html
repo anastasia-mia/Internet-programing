@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task1</title>
+    <style>
+        #mainDiv{
+            display:flex;
+        }
+        #divHolder{
+            width:50%;
+        }
+        #divConstructor .block{
+            margin-inline: auto;
+        }
+        #divConstructor p{
+            margin-inline: auto;
+            font-size: 25px;
+            color: red;
+        }
+        .block{
+            height: 40px;
+            background: mediumpurple;
+            margin: 1px;
+            border: 1px solid darkslateblue;
+        }
+    </style>
+</head>
+<body>
+     <select id="selectQuantity">
+         <option>Оберіть кількість</option>
+         <option>3</option>
+         <option>4</option>
+         <option>5</option>
+         <option>6</option>
+         <option>7</option>
+     </select>
+     <button id="deliverButton">Замовити</button>
+     <div id="mainDiv">
+         <div id="divHolder">
+         </div>
+         <div id="divConstructor">
+         </div>
+     </div>
+     <script>
+         class Block{
+             constructor(div, number){
+                 this.div = div;
+                 this.number = number;
+                 if(this.number.length > 1){
+                     alert("It\' not a number")
+                 }
+                 else{
+                     for(let i=0; i<number; i++){
+                        let block = this.createBlock();
+                        this.div.append(block);
+                     }
+                 }
+             }
+             createBlock(){
+                 let block = document.createElement('div');
+                 block.classList.add('block');
+                 let num = this.randomInteger(10,300);
+                 block.style.width = num + 'px';
+                 return block;
+             }
+             randomInteger(min,max){
+                 this.rand = min -0.5 + Math.random()*(max-min+1);
+                 return Math.round(this.rand);
+             }
+         }
+         let select = document.querySelector('#selectQuantity');
+         let deliverButton = document.querySelector('#deliverButton');
+         let divHolder = document.querySelector('#divHolder');
+         let divConstructor = document.querySelector('#divConstructor');
+
+         deliverButton.addEventListener('click', () => {
+             divHolder.innerHTML = '';
+             divConstructor.innerHTML = '';
+             new Block(divHolder, select.value);
+
+         });
+
+         let sortedArray = [];
+         let mainArray = [];
+         divHolder.addEventListener('click',(e) =>{
+             if(!e.target.classList.contains('block')) return;
+
+             divConstructor.prepend(e.target);
+             let splitWidth = e.target.style.width.split('');
+             splitWidth.splice(splitWidth.length - 2, 2);
+             mainArray.push(parseInt(splitWidth.join('')));
+             sortedArray.push(parseInt(splitWidth.join('')));
+             if(divConstructor.children.length === parseInt(select.value)){
+                 let message = document.createElement('p');
+                 divConstructor.prepend(message);
+                 sortedArray = sortedArray.sort(function(a,b) {return b-a});
+                 if(JSON.stringify(mainArray) === JSON.stringify(sortedArray)){
+                     message.innerHTML = 'Можна заселяти';
+                 }
+                 else {
+                     message.innerHTML = 'Невдача';
+                 }
+             }
+         })
+
+     </script>
+</body>
+</html>
