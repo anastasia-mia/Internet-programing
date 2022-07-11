@@ -3,8 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <title>Task2</title>
+    <style>
+        #mainDiv{
+            height: 200px;
+            width: 156px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .colorDiv{
+            border: 1px solid gray;
+            height: 100px;
+            width: 50px;
+        }
+        #fillDiv{
+            width: 170px;
+            height:120px;
+            border: 1px solid black;
+            margin-top: 30px;
+            margin-left: 50px;
+        }
+        #container{
+            display:flex;
+        }
+
+    </style>
 </head>
 <body>
+    <div id="container">
+      <div id="mainDiv">
+          <div class="colorDiv" style="background-color: mediumpurple"></div>
+          <div class="colorDiv" style="background-color: yellow"></div>
+          <div class="colorDiv" style="background-color: cornflowerblue"></div>
+          <div class="colorDiv" style="background-color: olive"></div>
+          <div class="colorDiv" style="background-color: coral"></div>
+          <div class="colorDiv" style="background-color: cadetblue"></div>
+      </div>
+      <div id="fillDiv"></div>
+    </div>
+    <script>
+        function makeGradient(arrayColors){
+            let array = arrayColors.join(',')
+            fillDiv.style.backgroundImage = "linear-gradient(" + array + ")";
+        }
 
+        let mainDiv = document.querySelector('#mainDiv');
+        let fillDiv = document.querySelector('#fillDiv');
+
+        let arrayColors = [];
+        mainDiv.addEventListener('click', (e) =>{
+            if(!e.target.classList.contains('colorDiv')) return;
+
+            if (arrayColors.includes(e.target.style.backgroundColor)) {
+                let index = arrayColors.indexOf(e.target.style.backgroundColor);
+                arrayColors.splice(index, 1);
+                if(arrayColors.length === 0) fillDiv.style.backgroundColor = 'transparent';
+                else if(arrayColors.length === 1){
+                    fillDiv.style.backgroundImage = '';
+                    fillDiv.style.backgroundColor = arrayColors[0];
+                }
+                else {
+                    makeGradient(arrayColors);
+                }
+            }
+            else{
+                arrayColors.push(e.target.style.backgroundColor);
+                if(arrayColors.length === 1){
+                    fillDiv.style.backgroundColor = arrayColors[0];
+                }
+                else {
+                    makeGradient(arrayColors);
+                }
+            }
+
+        })
+    </script>
 </body>
 </html>
