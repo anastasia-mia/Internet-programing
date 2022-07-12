@@ -3,8 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>Task6</title>
+  <style>
+    .spanRange{
+      color: gray;
+    }
+    .selectedNum{
+      background-color: darkgrey;
+      height: 30px;
+      width: 30px;
+      border:1px solid black;
+      box-sizing: border-box;
+      text-align: center;
+      line-height: 30px;
+    }
+    .formGroup{
+      display:flex;
+    }
+    .formGroup *{
+      margin: 5px;
+    }
+    #rotatedDiv{
+      margin:150px;
+      background-color: slateblue;
+      height: 250px;
+      width: 250px;
+    }
+  </style>
 </head>
 <body>
+     <form name="formRange">
+         <div class="formGroup">
+           <label for="width">Width</label>
+           <span class="spanRange">0</span>
+           <input type="range" id='width' name="widthDiv" min="0" max="500">
+           <span class="spanRange">500</span>
+           <div class="selectedNum" id="selectedWidth">250</div>
+         </div>
+       <div class="formGroup">
+         <label for="height">Height</label>
+         <span class="spanRange">0</span>
+         <input type="range" id="height" name="heightDiv" min="0" max="500">
+         <span class="spanRange">500</span>
+         <div class="selectedNum" id="selectedHeight">250</div>
+       </div>
+       <div class="formGroup">
+         <label for="rotation">Rotate</label>
+         <span class="spanRange">0</span>
+         <input type="range" id="rotation" name="rotationDiv" min="0" max="360">
+         <span class="spanRange">360</span>
+         <div class="selectedNum" id="selectedRotation">180</div>
+       </div>
+     </form>
+     <div id="rotatedDiv"></div>
 
+     <script>
+       let form = document.forms[0];
+       let rotatedDiv = document.querySelector('#rotatedDiv');
+
+       form.widthDiv.addEventListener('input', ()=>{
+           document.querySelector('#selectedWidth').innerHTML = form.widthDiv.value;
+           rotatedDiv.style.width = form.widthDiv.value + 'px';
+       })
+       form.heightDiv.addEventListener('input', ()=>{
+           document.querySelector('#selectedHeight').innerHTML = form.heightDiv.value;
+           rotatedDiv.style.height = form.heightDiv.value + 'px';
+       })
+       form.rotationDiv.addEventListener('input', ()=>{
+           document.querySelector('#selectedRotation').innerHTML = form.rotationDiv.value;
+           rotatedDiv.style.transform = 'rotate(' + form.rotationDiv.value + 'deg)';
+       })
+     </script>
 </body>
 </html>
