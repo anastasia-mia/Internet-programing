@@ -3,8 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <title>Task8</title>
+    <style>
+        #containerProducts{
+            width:25%
+        }
+        .productHolder{
+            display:flex;
+            border: 1px solid orange;
+            align-items: center;
+        }
+        .orderButton{
+            width: 25%;
+            height: 30px;
+            border: 2px solid darkgreen;
+            color:darkgreen;
+        }
+        .productName{
+            width: 30%;
+            margin-left: 15px;
+        }
+        #tableCart{
+            width:25%;
+            border: 1px solid black;
+        }
+        #tableCart td{
+            height: 50px;
+            width: 50%;
+            border: 1px solid black;
+            color: orange;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+     <h1 class="title">Список товарів:</h1>
+     <div id="containerProducts">
+         <div class="productHolder">
+             <p class="productName">Брюки</p>
+             <button class="orderButton">Замовити</button>
+         </div>
+         <div class="productHolder">
+             <p class="productName">Сорочка</p>
+             <button class="orderButton">Замовити</button>
+         </div>
+         <div class="productHolder">
+             <p class="productName">Шорти</p>
+             <button class="orderButton">Замовити</button>
+         </div>
+         <div class="productHolder">
+             <p class="productName">Туфлі</p>
+             <button class="orderButton">Замовити</button>
+         </div>
+     </div>
+     <h1 class="title">Кошик:</h1>
+     <table id="tableCart">
+         <tr>
+             <td>Брюки</td>
+             <td>0</td>
+         </tr>
+         <tr>
+             <td>Сорочка</td>
+             <td>0</td>
+         </tr>
+         <tr>
+             <td>Шорти</td>
+             <td>0</td>
+         </tr>
+         <tr>
+             <td>Туфлі</td>
+             <td>0</td>
+         </tr>
+     </table>
+     <script>
+         let containerProducts = document.querySelector('#containerProducts');
+         let tableCart = document.querySelector('#tableCart');
+         let products = ['Брюки', 'Сорочка', 'Шорти', 'Туфлі'];
 
+         containerProducts.addEventListener('click', (e) =>{
+             if(e.target.nodeName !== 'BUTTON') return;
+             let index = products.indexOf(e.target.previousElementSibling.innerHTML);
+             tableCart.rows[index].children[1].innerHTML ++;
+         })
+     </script>
 </body>
 </html>
