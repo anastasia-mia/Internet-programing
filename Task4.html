@@ -4,30 +4,137 @@
     <meta charset="UTF-8">
     <title>Task4</title>
     <style>
+        #container{
+            display:flex;
+        }
         #mainDiv{
             height: 200px;
-            width: 156px;
+            width: 300px;
+            box-sizing: border-box;
             display: flex;
             flex-wrap: wrap;
         }
         .colorDiv{
-            border: 1px solid gray;
-            height: 100px;
-            width: 50px;
-        }
-        #fillDiv{
-            width: 170px;
-            height:120px;
             border: 1px solid black;
-            margin-top: 30px;
+            box-sizing: border-box;
+            height: 100px;
+            width: 100px;
+        }
+        #drawDiv{
+            height: 400px;
+            box-sizing: border-box;
+            width: 402px;
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px dashed black;
             margin-left: 50px;
         }
-        #container{
-            display:flex;
+
+        #drawDiv div{
+            border: 1px dashed black;
+            box-sizing: border-box;
+            height: 50px;
+            width: 50px;
+        }
+
+        .chosen{
+            border: 5px solid darkred;
         }
     </style>
 </head>
 <body>
+ <div id="container">
+    <div id="mainDiv">
+        <div class="colorDiv" style="background-color: mediumpurple"></div>
+        <div class="colorDiv" style="background-color: yellow"></div>
+        <div class="colorDiv" style="background-color: deeppink"></div>
+        <div class="colorDiv" style="background-color: olive"></div>
+        <div class="colorDiv" style="background-color: coral"></div>
+        <div class="colorDiv" style="background-color: blue"></div>
+    </div>
+    <div id="drawDiv">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+    </div>
+ </div>
+   <script>
+    let mainDiv = document.querySelector('#mainDiv');
+    let drawDiv = document.querySelector('#drawDiv');
 
+    let color = '';
+    mainDiv.addEventListener('click', (e) =>{
+        if(e.target.nodeName !== 'DIV') return;
+        Array.from(mainDiv.children).forEach(element => element.classList.remove('chosen'));
+        color = e.target.style.backgroundColor;
+        e.target.classList.add('chosen')
+    });
+
+    drawDiv.addEventListener('click',(e) =>{
+        if(e.target.nodeName !== 'DIV') return;
+        e.target.style.backgroundColor = color;
+    })
+   </script>
 </body>
 </html>
