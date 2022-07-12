@@ -3,8 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Task5</title>
+    <style>
+        #divBlocks{
+            display: block;
+            flex-wrap: wrap;
+        }
+        .innerDiv{
+            height: 100px;
+            width: 100px;
+            border: 1px solid black;
+            display: flex;
+            box-sizing: border-box;
+        }
+        .row{
+            display: flex;
+        }
+    </style>
 </head>
 <body>
+      <textarea id="textInput"></textarea>
+      <button id="createButton">Create</button>
+      <div id="divBlocks"></div>
+      <script>
+          function createDiv(row){
+              let div = document.createElement('div');
+              div.classList.add('innerDiv');
+              row.append(div);
+              return div;
+          }
+        let textarea = document.querySelector('#textInput');
+        let divBlocks = document.querySelector('#divBlocks');
+        let button = document.querySelector('#createButton');
 
+        button.addEventListener('click', () =>{
+            let arrayOfRows = textarea.value.split('\n');
+            arrayOfRows.forEach(element => {
+                let arrayOfNum = element.split('');
+                let row = document.createElement('div');
+                row.classList.add('row');
+                arrayOfNum.forEach(element =>{
+                    switch(element){
+                        case '1':
+                            let blackDiv = createDiv(row);
+                            blackDiv.style.backgroundColor = 'black'
+                            break;
+                        case '0':
+                            let whiteDiv = createDiv(row);
+                            whiteDiv.style.backgroundColor = 'white'
+                            break;
+                        default:
+                            console.log('error');
+                    }
+                    divBlocks.append(row);
+                })
+                divBlocks.innerHTML += '\n'
+            })
+        })
+
+      </script>
 </body>
 </html>
