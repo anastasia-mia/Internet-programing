@@ -3,8 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>Task11</title>
+    <style>
+        .image-container{
+        }
+        .content{
+            width:400px;
+            height:600px;
+            background-size: cover;
+            margin:10px;
+        }
+        .infoBlock{
+            display: none;
+            width: 80px;
+            height: 50px;
+            background-color: lightyellow;
+            position: absolute;
+            text-align: center;
+            line-height: 50px;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+    </style>
 </head>
 <body>
+<div class="image-container">
+    <img data-picture='Beach' src="img/beach.jpg" class="content">
+    <img data-picture='Plant' src="img/plant.jpg" class="content">
+    <img data-picture='Street' src="img/street.jpg" class="content">
+</div>
+<div class="infoBlock"></div>
+  <script>
+      function showDiv(block, offSetX, offSetY){
+          block.style.display = 'block';
+          block.style.top = offSetY - 20 + 'px';
+          block.style.left = offSetX + 20 + 'px';
+          return block;
+      }
 
+      let divContainer = document.querySelector('.image-container');
+      let infoBlock = document.querySelector('.infoBlock');
+      divContainer.addEventListener('mousemove', (e) =>{
+          if(e.target.nodeName !== 'IMG'){
+              infoBlock.style.display = 'none';
+              return;
+          }
+
+          let offSetX = e.pageX;
+          let offSetY = e.pageY;
+          switch(e.target.dataset.picture){
+              case 'Beach':
+                  let infoDivBeach = showDiv(infoBlock, offSetX, offSetY);
+                  infoDivBeach.innerHTML = 'Beach';
+                  break;
+              case 'Plant':
+                  let infoDivPlant = showDiv(infoBlock, offSetX, offSetY);
+                  infoDivPlant.innerHTML = 'Plant';
+                  break;
+              case 'Street':
+                  let infoDivStreet = showDiv(infoBlock, offSetX, offSetY);
+                  infoDivStreet.innerHTML = 'Street';
+                  break;
+              default:
+                  console.log('It doesn\'t work!')
+          }
+      })
+  </script>
 </body>
 </html>
