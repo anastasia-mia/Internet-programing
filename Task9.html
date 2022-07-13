@@ -2,9 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Task9</title>
+    <style>
+        #mainDiv{
+            width: 300px;
+            height: 300px;
+            border: 2px solid orange;
+            position: relative;
+        }
+        .block{
+            position:absolute;
+        }
+    </style>
 </head>
 <body>
+     <div id="mainDiv">
 
+     </div>
+     <script>
+         class Square{
+             constructor(mainDiv, array){
+                 this.mainDiv = mainDiv;
+                 this.array = array;
+                 for(let i of this.array){
+                     let div = this.createBlock();
+                     div.style.backgroundColor = i;
+                     this.mainDiv.append(div);
+                 }
+             }
+             createBlock(){
+                 let block = document.createElement('div');
+                 block.classList.add('block');
+                 let num = this.randomInteger(30,90);
+                 let top = this.randomTopAndLeft(0,200);
+                 let left = this.randomTopAndLeft(0,200);
+                 block.style.width = num + 'px';
+                 block.style.height = num + 'px';
+                 block.style.top = top + 'px';
+                 block.style.left = left + 'px';
+                 return block;
+             }
+             randomInteger(min,max){
+                 this.rand = min -0.5 + Math.random()*(max-min+1);
+                 return Math.round(this.rand);
+             }
+             randomTopAndLeft(min,max){
+                 this.rand = min -0.5 + Math.random()*(max-min+1);
+                 return Math.round(this.rand);
+             }
+         }
+         let mainDiv = document.querySelector('#mainDiv');
+         let arrayColors = ['green', 'red', 'orange', 'purple'];
+         new Square(mainDiv, arrayColors);
+         let move= false;
+         let offSetX, offSetY;
+         let currentDiv;
+
+
+         mainDiv.addEventListener('mousedown', (e) =>{
+             if(!e.target.classList.contains('block')) return;
+             move = true;
+             offSetX = e.offsetX;
+             offSetY = e.offsetY;
+             currentDiv = e.target;
+             console.log(offSetX);
+             console.log(offSetY);
+
+         });
+
+         document.addEventListener('mousemove', (e) =>{
+             if(move){
+                 currentDiv.style.left = Math.max(Math.min(e.pageX - offSetX, currentDiv.parentNode.clientWidth - currentDiv.clientWidth),0) + 'px';
+                 currentDiv.style.top = Math.max(Math.min(e.pageY - offSetY, currentDiv.parentNode.clientHeight - currentDiv.clientHeight),0) + 'px';
+             }
+         });
+         document.addEventListener('mouseup', (e)=>{
+             move = false;
+         })
+
+     </script>
 </body>
 </html>
