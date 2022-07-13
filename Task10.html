@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task10</title>
+    <style>
+        *,
+        *:before,
+        *:after{
+            padding:0;
+            margin:0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+        }
+        .container{
+            width: 500px;
+            height: 350px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            transition: flex .3s ease;
+            left: 50%;
+            top: 50%;
+            padding: 20px;
+        }
+        .image-container{
+            position: relative;
+        }
+        img{
+            position: relative;
+            width: 460px;
+            height: 280px;
+            display:none;
+        }
+        .active{
+            display:block;
+        }
+        #prev, #next{
+            height: 40px;
+            width: 40px;
+            position: absolute;
+            background-color: slateblue;
+            color: white;
+            margin: auto;
+            top:0;
+            bottom: 0;
+            border: none;
+            border-radius: 3px;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+        #prev{
+            left: 5px;
+        }
+        #next{
+            right: 5px;
+        }
+    </style>
+</head>
+<body>
+      <div class="container">
+           <div class="image-container">
+               <img src="img/canyon.jpg" id="content1" class="active">
+               <img src="img/mountains.jpg" id="content2">
+               <img src="img/night.jpg" id="content3">
+               <img src="img/lion.jpg" id="content4">
+           </div>
+          <button id="prev" onclick="prev()">&lt</button>
+          <button id="next" onclick="next()">&gt</button>
+      </div>
+<script>
+    let images = document.querySelectorAll('.image-container img');
+    let i = 0;
+    let j = 4;
+    function next(){
+        document.getElementById('content' + (i+1)).classList.remove('active');
+        i = (j+i+1) % j;
+        document.getElementById('content' + (i+1)).classList.add('active');
+    }
+    function prev(){
+        document.getElementById('content' + (i+1)).classList.remove('active');
+        i = (j+i-1) % j;
+        document.getElementById('content' + (i+1)).classList.add('active');
+    }
+
+</script>
+</body>
+</html>
