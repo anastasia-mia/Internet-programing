@@ -3,8 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>Task12</title>
+    <style>
+        #container{
+            margin: 20px;
+            width: 600px;
+            height: 600px;
+            background-color: slateblue;
+            position: relative;
+            overflow: hidden;
+        }
+        input{
+            border: 2px solid orange;
+            background: white;
+            height: 20px;
+        }
+        .circle{
+            background-color: orange;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
 </head>
 <body>
+      <button id="build">Build</button>
+      <input type="text" name="inputNumber" id="inputNumber">
+      <div id="container"></div>
+      <script>
+         class Circle{
+              constructor(div){
+                  this.div = div;
+                  let circle = document.createElement('div');
+                  circle.classList.add('circle');
+                  let height = this.randomNumber(30,150);
+                  let top = this.randomNumber(0,550);
+                  let left = this.randomNumber(0,550);
+                  circle.style.height = height + 'px';
+                  circle.style.width = height + 'px';
+                  circle.style.top = top + 'px';
+                  circle.style.left = left + 'px';
+                  this.div.append(circle);
 
+              }
+              randomNumber(min,max){
+                  this.rand = min -0.5 + Math.random()*(max-min+1);
+                  return Math.round(this.rand);
+              }
+          }
+          let divContainer = document.querySelector('#container');
+          let buttonBuild = document.querySelector('#build');
+          let inputNumber = document.querySelector('#inputNumber');
+
+
+          buttonBuild.addEventListener('click',() =>{
+              let number = parseInt(inputNumber.value);
+              for(let i=0; i < number; i++){
+                  new Circle(divContainer);
+              }
+          });
+          divContainer.addEventListener('click', (e) =>{
+              if(e.target.classList.contains('circle')){
+                  e.target.remove()
+              }
+
+
+          })
+      </script>
 </body>
 </html>
