@@ -3,8 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Task14</title>
+  <style>
+      #grayStars{
+          background-image: url("img/starGray.png");
+          position: relative;
+          height: 46px;
+          width: 230px;
+
+      }
+      #yellowStars{
+          background-image: url("img/starYellow.png");
+          position: absolute;
+          height: 46px;
+          top:0;
+          left:0;
+      }
+      button{
+          border: darkgreen 2px solid;
+          background-color: transparent;
+          height: 50px;
+          width: 90px;
+          margin: 5px;
+      }
+      #container{
+          align-content:center;
+          width: 40%;
+          margin: auto;
+      }
+      #showing{
+          display: flex;
+      }
+      #rating{
+          width:90px;
+      }
+  </style>
 </head>
 <body>
-
+      <div id="container">
+         <div id="showing">
+             <h1 id="rating">0</h1>
+             <button id="buttonUp">UP</button>
+             <button id="buttonDown">DOWN</button>
+         </div>
+         <div id="grayStars">
+             <div id="yellowStars">
+             </div>
+         </div>
+      </div>
+      <script>
+          let buttonUp = document.querySelector('#buttonUp');
+          let buttonDown = document.querySelector('#buttonDown');
+          let yellowDiv = document.querySelector('#yellowStars');
+          let rating = document.querySelector('#rating')
+          let num = 0;
+          buttonUp.addEventListener('click', () =>{
+              if(yellowDiv.style.width !== 100+'%'){
+                  num ++;
+                  yellowDiv.style.width = num +'%';
+                  rating.innerHTML = num + '%'
+              }
+          })
+          buttonDown.addEventListener('click', () =>{
+              num--
+              if(yellowDiv.style.width !== '0%'){
+                  yellowDiv.style.width = num +'%';
+                  rating.innerHTML = num + '%'
+              }
+          })
+      </script>
 </body>
 </html>
