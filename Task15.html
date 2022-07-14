@@ -3,8 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <title>Task15</title>
+    <style>
+        #container{
+            display:flex;
+        }
+        #divHolder{
+            display: flex;
+        }
+        #divPasting{
+            border: 3px solid orange;
+            height: 600px;
+            width: 600px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+        .square, .circle{
+            background-color: slateblue;
+            height: 80px;
+            width: 80px;
+            margin: 15px;
+            box-sizing: border-box;
+        }
+        .circle{
+            border-radius: 50%;
+        }
+        .triangle{
+            width: 80px;
+            height: 80px;
+            background-image: linear-gradient(to bottom right, transparent 50%, slateblue 0 ), linear-gradient(to top right, slateblue 50%, transparent 0);
+            background-size: 50% 100%;
+            background-repeat: no-repeat;
+            background-position: left, right;
+            margin: 15px;
+            box-sizing: border-box;
+        }
+        .active{
+            border: 4px solid red;
+        }
+        .addingDiv{
+            position:absolute;
+        }
+    </style>
 </head>
 <body>
+        <div id="container">
+            <div id="divHolder">
+                <div data-figure="square" class="square figure"></div>
+                <div data-figure="circle" class="circle figure"></div>
+                <div data-figure="triangle" class="triangle figure"></div>
+            </div>
+            <div id="divPasting"></div>
+        </div>
+<script>
+    function createElements(figure){
+        console.log(figure);
+        let div=document.createElement('div');
+        div.classList.add(figure);
+        div.classList.add('addingDiv');
+        return div;
+    }
 
+    let divHolder = document.querySelector('#divHolder');
+    let divPasting = document.querySelector('#divPasting');
+    let allFigures = document.querySelectorAll('.figure');
+    let figure = '';
+    divHolder.addEventListener('click', (e) =>{
+        if(!e.target.classList.contains('figure')) return;
+        allFigures.forEach(element => {
+            if(element.classList.contains('active')){
+                element.classList.remove('active');
+            }
+        })
+        e.target.classList.add('active');
+        switch(e.target.dataset.figure){
+            case 'square': figure = 'square'; break;
+            case 'circle': figure = 'circle';break;
+            case 'triangle': figure = 'triangle';break;
+            default: console.log('It doesnt work');
+        }
+    })
+    divPasting.addEventListener('mousedown', (e)=>{
+        let newFigure = createElements(figure);
+        newFigure.style.top = e.offsetY - 55 + 'px';
+        newFigure.style.left = e.offsetX - 55 + 'px';
+        console.log(e.offsetX);
+        console.log(newFigure.style.left)
+        divPasting.append(newFigure);
+    })
+</script>
 </body>
 </html>
